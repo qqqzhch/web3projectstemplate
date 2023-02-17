@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import { Button,Header,Footer } from '@monorepo/ui-components'
+import { Header,Footer } from '@monorepo/ui-components'
+
 
 function App() {
   const [count, setCount] = useState(0)
