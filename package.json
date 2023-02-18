@@ -28,7 +28,6 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^12.1.4",
-    "@commons/stylelint-config": "*",
     "@changesets/cli": "^2.26.0",
     "commitizen": "^4.2.2",
     "commitlint-config-monorepo": "^2.0.2",
