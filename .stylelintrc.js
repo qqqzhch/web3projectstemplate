@@ -1,3 +1,3 @@
-const stylelintConfig = require('@commons/stylelint-config')
+const stylelintConfig = require('./packages/commons/stylelint-config')
 
 module.exports = stylelintConfig
