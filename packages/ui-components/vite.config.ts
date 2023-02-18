@@ -3,13 +3,15 @@ import react from '@vitejs/plugin-react'
 import path from 'node:path'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
+import macrosPlugin from "vite-plugin-babel-macros"
 
 export default defineConfig({
   plugins: [
     react(),
     dts({
       insertTypesEntry: true
-    })
+    }),
+    macrosPlugin()
   ],
   build: {
     lib: {
