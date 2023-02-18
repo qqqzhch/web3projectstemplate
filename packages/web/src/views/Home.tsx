@@ -2,8 +2,8 @@ import React from 'react';
 
 const Home = () => {
     return (
-        <div className="flex gap-4">
-            <div className="flex flex-col w-1/3 lg:w-1/3 ">
+        <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col w-full   lg:w-1/2 2xl:w-1/3 ">
                 <h1 className="m-8 text-2xl font-semibold border-b border-gray-300 py-4">My safe</h1>
                 <div>
                     1
