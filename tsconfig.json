@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": "./packages"
+    "baseUrl": "./packages",
+    "paths": {
+      
+    }
   }
 }
