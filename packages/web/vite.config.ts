@@ -7,45 +7,16 @@ import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfil
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
+import nodePolyfills from 'vite-plugin-node-stdlib-browser'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  resolve: {
-    "alias": {
-      process: "process/browser",
-      stream: "stream-browserify",
-      zlib: "browserify-zlib",
-      util: 'util',
-      EventEmitter:"events"
-      
-    }
-  },
   plugins: [react(),
-  macrosPlugin()
+  macrosPlugin(),
+  nodePolyfills()
   ],
   optimizeDeps: {
-    esbuildOptions: {
-      // Node.js global to browser globalThis
-      define: {
-        global: 'globalThis'
-      },
-      // Enable esbuild polyfill plugins
-      plugins: [
-        NodeGlobalsPolyfillPlugin({
-          process: true,
-          buffer: true
-        }),
-        NodeModulesPolyfillPlugin()
-      ]
-    }
-  },
-  build: {
-    rollupOptions: {
-      plugins: [
-        // Enable rollup polyfills plugin
-        // used during production bundling
-        rollupNodePolyFill()
-      ]
-    }
+    exclude: ['@ethersproject/hash', 'wrtc'],
+    include: ['js-sha3', '@ethersproject/bignumber']
   }
 })
