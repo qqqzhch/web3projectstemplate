@@ -4,6 +4,8 @@ import logo from '../../assets/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import Connectwallet from '../connectwallet'
+import ChainList from '../chainList/index'
+
 
 
 
@@ -33,14 +35,13 @@ export const Header = () => {
               <FontAwesomeIcon icon={icon({ name: 'bell', style: 'solid' })} />
             </div>
           </div>
-          <div  className="pr-4 pl-4 flex flex-row   hover:text-gray-900 border-r border-gray-400 last:border-r-0  items-center justify-center">
+          <div  className="pr-2 pl-2 flex flex-row   hover:text-gray-900 border-r border-gray-400 last:border-r-0  items-center justify-center">
             <Connectwallet></Connectwallet>
           </div>
           <div className="flex pr-4 pl-4 items-center justify-center   hover:text-gray-900 border-r border-gray-400 last:border-r-0">
-            <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin">BSC</div>
-            <div>
-              <FontAwesomeIcon icon={icon({ name: 'chevron-down', style: 'solid' })} />
-            </div>
+            <ChainList>
+          
+            </ChainList>
           </div>
         </nav>
         

@@ -6,10 +6,13 @@ import WalletModal from '../walletModal'
 import { useState, useEffect, useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { When } from 'react-if';
+import {getChainInfo} from '../../constants/chainInfo'
+import AccountInfo from '../accountInfo/index'
 
 const connectwallet:FC<{}> = ({}) => {
 let [isOpen, setIsOpen] = useState(false)
 let [walletName,setwalletName]=useState<string>("")
+let [chianName,setchianName]=useState<string>("")
 const {chainId, account } = useWeb3React()
 
   function closeModal() {
@@ -24,24 +27,30 @@ const {chainId, account } = useWeb3React()
      let name =   localStorage.getItem('walletIsConnectedTo')
      if(name!=null){
         setwalletName(name)
+       let ChainInfo =  getChainInfo(chainId)
+       if(ChainInfo?.label){
+        setchianName(ChainInfo?.label)
+       }
+       
      }
-  }, [])
+  }, [chainId])
 
   console.log('account',account)
     return (
         <>
         <When condition={account!==undefined}>
-        
+           <AccountInfo>
             <div  className="py-1 text-xl ">
               <img width={20} src={metamask}></img>
             </div>
             <div className="flex  flex-col  text-sm mx-4">
-              <div className="">{walletName} @ Goerli</div>
-              <div className="">{account}</div>
+              <div className="">{walletName} @ {chianName}</div>
+              <div className="">{account?.substring(0,4)}...{account?.substring(38,42)}</div>
             </div>
             <div className="py-1">
               <FontAwesomeIcon icon={icon({ name: 'chevron-down', style: 'solid' })} />
             </div>
+          </AccountInfo>       
         </When>
         <When condition={account===undefined}>
             
