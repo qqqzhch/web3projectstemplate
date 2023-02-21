@@ -21,7 +21,7 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
   ////
   const { addToast } = useToasts()
   const { library, chainId, account, activate, deactivate, active, error } = useWeb3React()
-  console.log(chainId, account, error)
+  
   const [accountData, setAccountData] = useState<null | accountDataType>(null)
   const noderef= useRef()
   
@@ -29,7 +29,7 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
   const connectMetaMask = useCallback(async () => {
     let status = false
     await activate(connectors.metamask, (err: any) => {
-      console.log('err',err)
+      
       addToast(err.message, { appearance: 'error' })
       if(err.message.indexOf("UnsupportedChainId")){
         EventEmitter.emit("UnsupportedChainId",true)
@@ -49,7 +49,7 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
   const connectWalletConnect = useCallback(async () => {
     let status = false
     await activate(connectors.walletConnect, (err: any) => {
-      console.log('err',err)
+      
       addToast(err.message, { appearance: 'error' })
       if(err.message.indexOf("UnsupportedChainId")){
         EventEmitter.emit("UnsupportedChainId",true)
@@ -79,7 +79,7 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
   // connect on load
   useEffect(() => {
     const connectWalletOnPageLoad = async () => {
-      console.log('start connect')
+      
       if (localStorage.getItem('walletIsConnectedTo') === 'metamask') {
         await connectMetaMask()
       }

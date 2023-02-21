@@ -10,7 +10,7 @@ export default async function(chainId:number,chainName:string,rpcUrls:Array<stri
       libraryprovider =window.ethereum 
     }
 
-    let hexchainId = "0x"+chainId.toString(16);
+    const hexchainId = "0x"+chainId.toString(16);
     
     try {
         if(libraryprovider.request){

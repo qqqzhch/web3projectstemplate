@@ -22,8 +22,6 @@
     "storybook": "yarn workspace @monorepo/ui-components storybook",
     "build-storybook": "yarn workspace @monorepo/ui-components build-storybook",
     "lint": "lerna run --parallel lint",
-    "lint:css": "lerna run --parallel lint:css",
-    "format": "prettier --write \"**/*.{ts,tsx}\"",
     "test:ci": "lerna run --parallel test:coverage"
   },
   "devDependencies": {
