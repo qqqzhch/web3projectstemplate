@@ -1,5 +1,5 @@
 import React,{FC} from 'react';
-import { Popover, Transition } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 import { useWeb3React } from '@web3-react/core'
 
 type Props = {

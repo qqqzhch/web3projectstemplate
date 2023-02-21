@@ -1,3 +1,3 @@
 import EventEmitter from 'eventemitter3';
-var EE = new EventEmitter()
+const EE = new EventEmitter()
 export default EE;

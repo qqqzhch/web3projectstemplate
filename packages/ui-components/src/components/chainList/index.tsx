@@ -1,5 +1,5 @@
 import React,{FC, useEffect,useState,useCallback} from 'react';
-import { Popover, Transition } from '@headlessui/react'
+import { Popover } from '@headlessui/react'
 import { ALL_SUPPORTED_CHAIN_IDS } from '../../constants/chains'
 import { getChainInfo,L1ChainInfo,L2ChainInfo } from '../../constants/chainInfo'
 import { useWeb3React } from '@web3-react/core'
@@ -21,14 +21,13 @@ interface  Chininfo {
 
 }
 const ChainList:FC<Props> = ({children}) => {
-  let [chains,setChains]= useState<(Chininfo)[]>();
-  let [chianName,setchianName]=useState<string>("")
-  let [unsupported,setUnsupported]=useState<boolean>(false)
+  const [chains,setChains]= useState<(Chininfo)[]>();
+  const [chianName,setchianName]=useState<string>("")
+  const [unsupported,setUnsupported]=useState<boolean>(false)
   const {chainId,account,error,library } = useWeb3React()
-  console.log('chainId',chainId,error)
-  console.log('library',library)
+  
   useEffect(()=>{
-    let data = ALL_SUPPORTED_CHAIN_IDS.map((item)=>{
+    const data = ALL_SUPPORTED_CHAIN_IDS.map((item)=>{
       return  {item:getChainInfo(item),chainId:item} 
     })
     setChains(data)
@@ -38,21 +37,21 @@ const ChainList:FC<Props> = ({children}) => {
   useEffect(() => {
     // setUnsupported(false) 
     if(chainId!=null){   
-      let ChainInfo =  getChainInfo(chainId)
+      const ChainInfo =  getChainInfo(chainId)
       if(ChainInfo?.label){
        setchianName(ChainInfo?.label)
       }
       
     }else{
-      let ChainInfo =  getChainInfo(1)
+      const ChainInfo =  getChainInfo(1)
       if(ChainInfo?.label){
        setchianName(ChainInfo?.label)
       }
 
     }
  }, [chainId])
- let SwitchingNetwork=useCallback( async(network:(L1ChainInfo | L2ChainInfo),chainId:SupportedChainId)=>{
-    console.log('- -')
+ const SwitchingNetwork=useCallback( async(network:(L1ChainInfo | L2ChainInfo),chainId:SupportedChainId)=>{
+    
     await switchEthereumChain(chainId,network.label,RPC_URLS[chainId],library,unsupported)
 
  },[library,unsupported])
@@ -64,7 +63,7 @@ const ChainList:FC<Props> = ({children}) => {
   })
 
  },[EventEmitter])
-
+    
     return (
      <Popover className="relative">
         <Popover.Button className="flex flex-row items-center justify-center  focus:outline-none  ">
