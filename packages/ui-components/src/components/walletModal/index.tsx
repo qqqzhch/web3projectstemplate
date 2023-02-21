@@ -8,6 +8,9 @@ import { useToasts } from 'react-toast-notifications'
 import { useWeb3React } from '@web3-react/core'
 import { accountDataType } from '../../web3react/types'
 import { useState, useEffect, useCallback } from 'react'
+import EventEmitter from '../../EventEmitter/index'
+import { faL } from '@fortawesome/free-solid-svg-icons'
+
 
 interface componentprops {
   isOpen: boolean
@@ -22,11 +25,18 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
   const [accountData, setAccountData] = useState<null | accountDataType>(null)
   const noderef= useRef()
   
+  
   const connectMetaMask = useCallback(async () => {
     let status = false
     await activate(connectors.metamask, (err: any) => {
       console.log('err',err)
       addToast(err.message, { appearance: 'error' })
+      if(err.message.indexOf("UnsupportedChainId")){
+        EventEmitter.emit("UnsupportedChainId",true)
+      }else{
+        EventEmitter.emit("UnsupportedChainId",false)
+      }
+      
       status = true
     })
 
@@ -41,6 +51,11 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
     await activate(connectors.walletConnect, (err: any) => {
       console.log('err',err)
       addToast(err.message, { appearance: 'error' })
+      if(err.message.indexOf("UnsupportedChainId")){
+        EventEmitter.emit("UnsupportedChainId",true)
+      }else{
+        EventEmitter.emit("UnsupportedChainId",false)
+      }
       status = true
     })
 
@@ -76,6 +91,8 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
 
     connectWalletOnPageLoad()
   }, [connectMetaMask, connectWalletConnect])
+
+  
   
   return (
     <>

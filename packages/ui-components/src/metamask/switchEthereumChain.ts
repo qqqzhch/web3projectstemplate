@@ -1,9 +1,20 @@
-export default async function(chainId:number,chainName:string,rpcUrls:Array<string>){
+
+
+
+export default async function(chainId:number,chainName:string,rpcUrls:Array<string>,library:any,Unsupported:boolean){
+     
+    let libraryprovider;
+    if(library!==undefined){
+      libraryprovider =library.provider
+    }else{
+      libraryprovider =window.ethereum 
+    }
+
     let hexchainId = "0x"+chainId.toString(16);
     
     try {
-        if(window.ethereum.request){
-            await window.ethereum.request({
+        if(libraryprovider.request){
+            await libraryprovider.request({
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: hexchainId }],
               });
@@ -14,8 +25,8 @@ export default async function(chainId:number,chainName:string,rpcUrls:Array<stri
         // This error code indicates that the chain has not been added to MetaMask.
         if (switchError.code === 4902) {
           try {
-              if(window.ethereum.request){
-                await window.ethereum.request({
+              if(libraryprovider.request){
+                await libraryprovider.request({
                     method: 'wallet_addEthereumChain',
                     params: [
                       {
@@ -34,4 +45,8 @@ export default async function(chainId:number,chainName:string,rpcUrls:Array<stri
         }
         // handle other "switch" errors
       }
+      if(Unsupported==true){
+        window.location.reload()
+      }
+      
 }
