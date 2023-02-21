@@ -25,11 +25,11 @@ export const Header:FC = () => {
         </div>
 
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center  ">
-          <div className="pr-4 pl-4    hover:text-gray-900 border-r border-gray-400 last:border-r-0 hidden lg:block">
+          {/* <div className="pr-4 pl-4    hover:text-gray-900 border-r border-gray-400 last:border-r-0 hidden lg:block">
             <button type="button" className="px-6 py-2 font-semibold border rounded border-gray-800 text-gray-800">
               Switch to bnb BNB Smart Chain
             </button>
-          </div>
+          </div> */}
           <div className="pr-4 pl-4   hover:text-gray-900 border-r border-gray-400 last:border-r-0 hidden md:block">
             <div className="py-2">
               <FontAwesomeIcon icon={icon({ name: 'bell', style: 'solid' })} />

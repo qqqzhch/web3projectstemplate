@@ -8,6 +8,8 @@ import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import switchEthereumChain from '../../metamask/switchEthereumChain'
 import {RPC_URLS} from '../../constants/networks'
 import { isSupportedChain, SupportedChainId } from '../../constants/chains'
+import EventEmitter from '../../EventEmitter/index'
+import { When } from 'react-if';
 
 type Props = {
     children?: React.ReactNode
@@ -21,8 +23,10 @@ interface  Chininfo {
 const ChainList:FC<Props> = ({children}) => {
   let [chains,setChains]= useState<(Chininfo)[]>();
   let [chianName,setchianName]=useState<string>("")
-  const {chainId,account,error } = useWeb3React()
+  let [unsupported,setUnsupported]=useState<boolean>(false)
+  const {chainId,account,error,library } = useWeb3React()
   console.log('chainId',chainId,error)
+  console.log('library',library)
   useEffect(()=>{
     let data = ALL_SUPPORTED_CHAIN_IDS.map((item)=>{
       return  {item:getChainInfo(item),chainId:item} 
@@ -32,7 +36,7 @@ const ChainList:FC<Props> = ({children}) => {
   },[ALL_SUPPORTED_CHAIN_IDS,getChainInfo])
 
   useEffect(() => {
-    
+    // setUnsupported(false) 
     if(chainId!=null){   
       let ChainInfo =  getChainInfo(chainId)
       if(ChainInfo?.label){
@@ -49,17 +53,42 @@ const ChainList:FC<Props> = ({children}) => {
  }, [chainId])
  let SwitchingNetwork=useCallback( async(network:(L1ChainInfo | L2ChainInfo),chainId:SupportedChainId)=>{
     console.log('- -')
-    await switchEthereumChain(chainId,network.label,RPC_URLS[chainId])
+    await switchEthereumChain(chainId,network.label,RPC_URLS[chainId],library,unsupported)
+
+ },[library,unsupported])
+ useEffect(()=>{
+  EventEmitter.on("UnsupportedChainId",(Unsupported)=>{
+    setUnsupported(Unsupported)
     
- },[])
+    
+  })
+
+ },[EventEmitter])
 
     return (
      <Popover className="relative">
         <Popover.Button className="flex flex-row items-center justify-center  focus:outline-none  ">
-        <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin">{chianName}</div>
+          <When condition={unsupported===true}>
+              <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-red-600 font-thin">Error</div>
               <div>
                 <FontAwesomeIcon icon={icon({ name: 'chevron-down', style: 'solid' })} />
               </div>
+          </When>
+          <When condition={unsupported!==true&&chainId!=undefined}>
+              <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin">{chianName}</div>
+              <div>
+                <FontAwesomeIcon icon={icon({ name: 'chevron-down', style: 'solid' })} />
+              </div>
+
+          </When>
+          <When condition={unsupported!==true&&chainId===undefined}>
+              <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin">Switch Network</div>
+              <div>
+                <FontAwesomeIcon icon={icon({ name: 'chevron-down', style: 'solid' })} />
+              </div>
+
+          </When>
+        
         </Popover.Button>
   
         <Popover.Panel className="absolute left-1/3 z-10 mt-4   max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl ">
