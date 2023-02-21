@@ -44,7 +44,7 @@ const {chainId, account } = useWeb3React()
               <img width={20} src={metamask}></img>
             </div>
             <div className="flex  flex-col  text-sm mx-4">
-              <div className="">{walletName} @ {chianName}</div>
+              <div className="">{walletName}</div>
               <div className="">{account?.substring(0,4)}...{account?.substring(38,42)}</div>
             </div>
             <div className="py-1">
