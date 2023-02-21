@@ -1,22 +1,31 @@
-import React,{FC, useEffect,useState} from 'react';
+import React,{FC, useEffect,useState,useCallback} from 'react';
 import { Popover, Transition } from '@headlessui/react'
 import { ALL_SUPPORTED_CHAIN_IDS } from '../../constants/chains'
 import { getChainInfo,L1ChainInfo,L2ChainInfo } from '../../constants/chainInfo'
 import { useWeb3React } from '@web3-react/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import switchEthereumChain from '../../metamask/switchEthereumChain'
+import {RPC_URLS} from '../../constants/networks'
+import { isSupportedChain, SupportedChainId } from '../../constants/chains'
 
 type Props = {
     children?: React.ReactNode
   };
-const ChainList:FC<Props> = ({children}) => {
-  let [chains,setChains]= useState<(L1ChainInfo | L2ChainInfo)[]>();
-  let [chianName,setchianName]=useState<string>("")
-  const {chainId } = useWeb3React()
 
+interface  Chininfo {
+  item:L1ChainInfo | L2ChainInfo,
+  chainId:number
+
+}
+const ChainList:FC<Props> = ({children}) => {
+  let [chains,setChains]= useState<(Chininfo)[]>();
+  let [chianName,setchianName]=useState<string>("")
+  const {chainId,account,error } = useWeb3React()
+  console.log('chainId',chainId,error)
   useEffect(()=>{
     let data = ALL_SUPPORTED_CHAIN_IDS.map((item)=>{
-      return   getChainInfo(item)
+      return  {item:getChainInfo(item),chainId:item} 
     })
     setChains(data)
 
@@ -24,20 +33,29 @@ const ChainList:FC<Props> = ({children}) => {
 
   useEffect(() => {
     
-    
-    if(name!=null){
-       
+    if(chainId!=null){   
       let ChainInfo =  getChainInfo(chainId)
       if(ChainInfo?.label){
        setchianName(ChainInfo?.label)
       }
       
+    }else{
+      let ChainInfo =  getChainInfo(1)
+      if(ChainInfo?.label){
+       setchianName(ChainInfo?.label)
+      }
+
     }
  }, [chainId])
+ let SwitchingNetwork=useCallback( async(network:(L1ChainInfo | L2ChainInfo),chainId:SupportedChainId)=>{
+    console.log('- -')
+    await switchEthereumChain(chainId,network.label,RPC_URLS[chainId])
+    
+ },[])
 
     return (
      <Popover className="relative">
-        <Popover.Button className="flex flex-row items-center justify-center  ">
+        <Popover.Button className="flex flex-row items-center justify-center  focus:outline-none  ">
         <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin">{chianName}</div>
               <div>
                 <FontAwesomeIcon icon={icon({ name: 'chevron-down', style: 'solid' })} />
@@ -47,12 +65,12 @@ const ChainList:FC<Props> = ({children}) => {
         <Popover.Panel className="absolute left-1/3 z-10 mt-4   max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl ">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid gap-4 bg-white p-6 flex flex-col">
-                    {chains?.map((item)=>{
+                    {chains?.map(({item,chainId})=>{
                      return(
                        
                        <a
                        key={item.label}
-                       
+                       onClick={()=>{SwitchingNetwork(item,chainId)}}
                        className="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                      >
                        <div className="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12">

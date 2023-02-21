@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{FC} from 'react'
 import { useState, useEffect, useCallback } from 'react'
 import logo from '../../assets/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -11,7 +11,7 @@ import ChainList from '../chainList/index'
 
 
 
-export const Header = () => {
+export const Header:FC = () => {
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap py-2 flex-row  justify-around  items-center ">
