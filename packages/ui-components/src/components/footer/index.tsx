@@ -1,7 +1,10 @@
 import React from 'react';
 import logo from '../../assets/logo.svg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
+import facebook from '../../assets/icon/facebook.svg'
+import twitter from '../../assets/icon/twitter.svg'
+import discord from '../../assets/icon/discord.svg'
+
+
 
 export  const Footer = () => {
     return (
@@ -21,15 +24,18 @@ export  const Footer = () => {
           </p>
           <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
             <a className="text-gray-500">
-            <FontAwesomeIcon icon={icon({ name: 'facebook', style: 'solid' })} />
+            
+            <img width={16} src={discord}></img>
             
             </a>
             <a className="ml-3 text-gray-500">
-            <FontAwesomeIcon icon={icon({ name: 'twitter', style: 'solid' })} />
+            
+            <img width={16} src={twitter}></img>
             
             </a>
             <a className="ml-3 text-gray-500">
-            <FontAwesomeIcon icon={icon({ name: 'linkedin', style: 'solid' })} />
+            
+            <img width={16} src={facebook}></img>
             
             </a>
             
