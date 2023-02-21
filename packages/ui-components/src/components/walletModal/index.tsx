@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, FC, MouseEventHandler } from 'react'
+import { Fragment, FC, MouseEventHandler, useRef } from 'react'
 
 import { ethers } from 'ethers'
 import connectors,{activateInjectedProvider} from '../../web3react/connectors'
@@ -18,11 +18,14 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
   ////
   const { addToast } = useToasts()
   const { library, chainId, account, activate, deactivate, active, error } = useWeb3React()
-  console.log(chainId, account, activate)
+  console.log(chainId, account, error)
   const [accountData, setAccountData] = useState<null | accountDataType>(null)
+  const noderef= useRef()
+  
   const connectMetaMask = useCallback(async () => {
     let status = false
     await activate(connectors.metamask, (err: any) => {
+      console.log('err',err)
       addToast(err.message, { appearance: 'error' })
       status = true
     })
@@ -36,6 +39,7 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
   const connectWalletConnect = useCallback(async () => {
     let status = false
     await activate(connectors.walletConnect, (err: any) => {
+      console.log('err',err)
       addToast(err.message, { appearance: 'error' })
       status = true
     })
@@ -107,7 +111,7 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
                   <div className="mt-2">
                     <p className="text-sm text-gray-500 flex flex-col items-center">
                       {walletsToDisplay.map(el => (
-                      <div className="my-1 flex-1">
+                      <div className="my-1 flex-1" key={el.id}>
                         <button key={el.id} onClick={el.fn} type="button" className="px-8 py-3 font-semibold border rounded border-blue-800 text-blue-800  w-48">{el.title}</button>
                       </div>
                       ))}

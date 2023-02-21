@@ -36,6 +36,7 @@ interface BaseChainInfo {
   }
   readonly color?: string
   readonly backgroundColor?: string
+  
 }
 
 export interface L1ChainInfo extends BaseChainInfo {
