@@ -1,5 +1,5 @@
 import { SupportedChainId } from './chains'
-console.log('import.meta.env',import.meta.env)
+
 const INFURA_KEY = import.meta.env.VITE_REACT_APP_INFURA_KEY
 
 if (typeof INFURA_KEY === 'undefined') {
