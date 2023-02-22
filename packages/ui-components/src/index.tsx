@@ -9,4 +9,8 @@ export * from './components/footer'
 export * from './components/header'
 export * from './web3react/index'
 export * from './components/selectnode'
+export * from './components/mpctype'
+export * from './components/threshold'
+
+
 export { providers }
