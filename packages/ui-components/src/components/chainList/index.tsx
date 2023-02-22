@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import switchEthereumChain from '../../metamask/switchEthereumChain'
 import {RPC_URLS} from '../../constants/networks'
-import { isSupportedChain, SupportedChainId } from '../../constants/chains'
+import { SupportedChainId } from '../../constants/chains'
 import EventEmitter from '../../EventEmitter/index'
 import { When } from 'react-if';
 
@@ -24,7 +24,7 @@ const ChainList:FC<Props> = ({children}) => {
   const [chains,setChains]= useState<(Chininfo)[]>();
   const [chianName,setchianName]=useState<string>("")
   const [unsupported,setUnsupported]=useState<boolean>(false)
-  const {chainId,account,error,library } = useWeb3React()
+  const {chainId,library } = useWeb3React()
   
   useEffect(()=>{
     const data = ALL_SUPPORTED_CHAIN_IDS.map((item)=>{
@@ -32,7 +32,7 @@ const ChainList:FC<Props> = ({children}) => {
     })
     setChains(data)
 
-  },[ALL_SUPPORTED_CHAIN_IDS,getChainInfo])
+  },[])
 
   useEffect(() => {
     // setUnsupported(false) 
@@ -62,7 +62,7 @@ const ChainList:FC<Props> = ({children}) => {
     
   })
 
- },[EventEmitter])
+ },[])
     
     return (
      <Popover className="relative">
@@ -74,14 +74,14 @@ const ChainList:FC<Props> = ({children}) => {
               </div>
           </When>
           <When condition={unsupported!==true&&chainId!=undefined}>
-              <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin">{chianName}</div>
-              <div>
+              <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin text-sm">{chianName}</div>
+              <div className="hidden lg:flex">
                 <FontAwesomeIcon icon={icon({ name: 'chevron-down', style: 'solid' })} />
               </div>
 
           </When>
           <When condition={unsupported!==true&&chainId===undefined}>
-              <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin">Switch Network</div>
+              <div className="px-6 py-1 mx-2 font-semibold  rounded  bg-yellow-300 font-thin text-sm">Support Network</div>
               <div>
                 <FontAwesomeIcon icon={icon({ name: 'chevron-down', style: 'solid' })} />
               </div>
@@ -90,7 +90,7 @@ const ChainList:FC<Props> = ({children}) => {
         
         </Popover.Button>
   
-        <Popover.Panel className="absolute left-1/3 z-10 mt-4   max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl ">
+        <Popover.Panel className="absolute left-1/3 z-10 mt-4   max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
                 <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                   <div className="relative grid gap-4 bg-white p-6 flex flex-col">
                     {chains?.map(({item,chainId})=>{
