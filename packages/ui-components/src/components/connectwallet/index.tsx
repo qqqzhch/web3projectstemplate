@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useCallback} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import metamask from '../../assets/icon/metamask.svg'
@@ -15,13 +15,17 @@ const [walletName,setwalletName]=useState<string>("")
 // const [chianName,setchianName]=useState<string>("")
 const {chainId, account } = useWeb3React()
 
-  function closeModal() {
+  const closeModal = useCallback(()=>{
     setIsOpen(false)
-  }
 
-  function openModal() {
+  },[setIsOpen])
+  
+  const openModal = useCallback(()=>{
     setIsOpen(true)
-  }
+
+  },[setIsOpen])  
+
+  
   useEffect(() => {
     
      const name =   localStorage.getItem('walletIsConnectedTo')
