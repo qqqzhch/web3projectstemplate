@@ -1,5 +1,5 @@
-import React,{FC} from 'react'
-import { useState, useEffect, useCallback } from 'react'
+import {FC} from 'react'
+
 import logo from '../../assets/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'

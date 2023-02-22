@@ -14,31 +14,31 @@ export const Injected = new InjectedConnector({
   
 });
 
-export const activateInjectedProvider = (providerName: "MetaMask" | "CoinBase"|"WalletConnect") => {
-  if (typeof window !== "undefined") {
-    const { ethereum } = window as any;
+// export const activateInjectedProvider = (providerName: "MetaMask" | "CoinBase"|"WalletConnect") => {
+//   if (typeof window !== "undefined") {
+//     const { ethereum } = window as any;
 
-    if (!ethereum?.providers) {
-      return undefined;
-    }
+//     if (!ethereum?.providers) {
+//       return undefined;
+//     }
 
-    let provider;
-    switch (providerName) {
-      case "CoinBase":
-        provider = ethereum.providers.find(
-          ({ isCoinbaseWallet }: any) => isCoinbaseWallet
-        );
-        break;
-      case "MetaMask":
-        provider = ethereum.providers.find(({ isMetaMask }: any) => isMetaMask);
-        break;
-    }
+//     let provider;
+//     switch (providerName) {
+//       case "CoinBase":
+//         provider = ethereum.providers.find(
+//           ({ isCoinbaseWallet }: any) => isCoinbaseWallet
+//         );
+//         break;
+//       case "MetaMask":
+//         provider = ethereum.providers.find(({ isMetaMask }: any) => isMetaMask);
+//         break;
+//     }
 
-    if (provider) {
-      ethereum.setSelectedProvider(provider);
-    }
-  } else return;
-};
+//     if (provider) {
+//       ethereum.setSelectedProvider(provider);
+//     }
+//   } else return;
+// };
 
 // activateInjectedProvider("MetaMask");
 
@@ -50,16 +50,16 @@ const WalletConnect = new WalletConnectConnector({
 });
 
 // Coinbase
-const CoinbaseWallet = new WalletLinkConnector({
-  url: `https://rinkeby.infura.io/v3/f784c0c448844cce856d62a06f66a52d`,
-  appName: "My dApp 😎",
-  supportedChainIds: [1, 3, 4, 5, 42],
-});
+// const CoinbaseWallet = new WalletLinkConnector({
+//   url: `https://rinkeby.infura.io/v3/f784c0c448844cce856d62a06f66a52d`,
+//   appName: "My dApp 😎",
+//   supportedChainIds: [1, 3, 4, 5, 42],
+// });
 
 const connectors = {
   metamask: Injected,
   walletConnect: WalletConnect,
-  coinbaseWallet: CoinbaseWallet,
+  // coinbaseWallet: CoinbaseWallet,
 };
 
 export default connectors;

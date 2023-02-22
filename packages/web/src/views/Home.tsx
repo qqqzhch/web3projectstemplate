@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 const Home = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-4">
@@ -34,17 +35,19 @@ const Home = () => {
           </p>
         </div>
         <div className="flex flex-wrap   lg:mx-28 mb-60 ">
-        <div className="p-4 w-full xl:w-1/2 2xl:w-1/3">
+        <div className="p-4 w-full xl:w-1/2 2xl:w-1/3 ">
           <div className="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
             <h1 className="tracking-widest text-2xl title-font font-medium text-gray-900 mb-1">create wallet</h1>
             
             <p className="leading-relaxed mb-3">A new wallet that is controlled by one or multiple owners..</p>
             
             <div className="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
-            
+            <Link to={'/login'}>
             <button className="bg-sky-500 hover:bg-sky-700 px-5 py-2.5 text-sm leading-5 rounded-md font-semibold text-white">
-                Create new Wallet
+            Create new Wallet
             </button>
+            </Link>
+            
             </div>
           </div>
         </div>

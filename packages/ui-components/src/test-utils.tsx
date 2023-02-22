@@ -3,9 +3,9 @@ import { render } from '@testing-library/react'
 
 // const AllTheProviders = ({ children }: any) => <CustomThemeProvider>{children}</CustomThemeProvider>
 
-const customRender = (ui: any, options?: any) => render(ui, {  ...options })
+// const customRender = (ui: any, options?: any) => render(ui, {  ...options })
 
 // re-export everything
 export * from '@testing-library/react'
 // override render method
-export { customRender as render }
+export { render }

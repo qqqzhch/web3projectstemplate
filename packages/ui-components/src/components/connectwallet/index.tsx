@@ -3,16 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import metamask from '../../assets/icon/metamask.svg'
 import WalletModal from '../walletModal'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { When } from 'react-if';
-import {getChainInfo} from '../../constants/chainInfo'
+// import {getChainInfo} from '../../constants/chainInfo'
 import AccountInfo from '../accountInfo/index'
 
 const Connectwallet:FC = () => {
 const [isOpen, setIsOpen] = useState(false)
 const [walletName,setwalletName]=useState<string>("")
-const [chianName,setchianName]=useState<string>("")
+// const [chianName,setchianName]=useState<string>("")
 const {chainId, account } = useWeb3React()
 
   function closeModal() {
@@ -27,10 +27,10 @@ const {chainId, account } = useWeb3React()
      const name =   localStorage.getItem('walletIsConnectedTo')
      if(name!=null){
         setwalletName(name)
-        const ChainInfo =  getChainInfo(chainId)
-       if(ChainInfo?.label){
-        setchianName(ChainInfo?.label)
-       }
+      //   const ChainInfo =  getChainInfo(chainId)
+      //  if(ChainInfo?.label){
+      //   // setchianName(ChainInfo?.label)
+      //  }
        
      }
   }, [chainId])

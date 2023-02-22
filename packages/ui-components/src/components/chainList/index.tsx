@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { icon } from '@fortawesome/fontawesome-svg-core/import.macro'
 import switchEthereumChain from '../../metamask/switchEthereumChain'
 import {RPC_URLS} from '../../constants/networks'
-import { isSupportedChain, SupportedChainId } from '../../constants/chains'
+import { SupportedChainId } from '../../constants/chains'
 import EventEmitter from '../../EventEmitter/index'
 import { When } from 'react-if';
 
@@ -24,7 +24,7 @@ const ChainList:FC<Props> = ({children}) => {
   const [chains,setChains]= useState<(Chininfo)[]>();
   const [chianName,setchianName]=useState<string>("")
   const [unsupported,setUnsupported]=useState<boolean>(false)
-  const {chainId,account,error,library } = useWeb3React()
+  const {chainId,library } = useWeb3React()
   
   useEffect(()=>{
     const data = ALL_SUPPORTED_CHAIN_IDS.map((item)=>{
@@ -32,7 +32,7 @@ const ChainList:FC<Props> = ({children}) => {
     })
     setChains(data)
 
-  },[ALL_SUPPORTED_CHAIN_IDS,getChainInfo])
+  },[])
 
   useEffect(() => {
     // setUnsupported(false) 
@@ -62,7 +62,7 @@ const ChainList:FC<Props> = ({children}) => {
     
   })
 
- },[EventEmitter])
+ },[])
     
     return (
      <Popover className="relative">

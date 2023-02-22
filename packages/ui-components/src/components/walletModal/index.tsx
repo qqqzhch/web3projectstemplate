@@ -1,15 +1,15 @@
-import React from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, FC, MouseEventHandler, useRef } from 'react'
 
-import { ethers } from 'ethers'
-import connectors,{activateInjectedProvider} from '../../web3react/connectors'
+import { Dialog, Transition } from '@headlessui/react'
+import { Fragment, FC } from 'react'
+
+
+import connectors from '../../web3react/connectors'
 import { useToasts } from 'react-toast-notifications'
 import { useWeb3React } from '@web3-react/core'
-import { accountDataType } from '../../web3react/types'
-import { useState, useEffect, useCallback } from 'react'
+// import { accountDataType } from '../../web3react/types'
+import {  useEffect, useCallback } from 'react'
 import EventEmitter from '../../EventEmitter/index'
-import { faL } from '@fortawesome/free-solid-svg-icons'
+
 
 
 interface componentprops {
@@ -20,15 +20,15 @@ interface componentprops {
 const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
   ////
   const { addToast } = useToasts()
-  const { library, chainId, account, activate, deactivate, active, error } = useWeb3React()
+  const {  activate} = useWeb3React()
   
-  const [accountData, setAccountData] = useState<null | accountDataType>(null)
-  const noderef= useRef()
+  // const [accountData, setAccountData] = useState<null | accountDataType>(null)
+  // const noderef= useRef()
   
   
   const connectMetaMask = useCallback(async () => {
     let status = false
-    await activate(connectors.metamask, (err: any) => {
+    await activate(connectors.metamask, (err: Error) => {
       
       addToast(err.message, { appearance: 'error' })
       if(err.message.indexOf("UnsupportedChainId")){
@@ -45,10 +45,10 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
       addToast('Connected to MetaMask', { appearance: 'success' })
       closeModal()
     }
-  }, [activate, addToast])
+  }, [activate, addToast,closeModal])
   const connectWalletConnect = useCallback(async () => {
     let status = false
-    await activate(connectors.walletConnect, (err: any) => {
+    await activate(connectors.walletConnect, (err: Error) => {
       
       addToast(err.message, { appearance: 'error' })
       if(err.message.indexOf("UnsupportedChainId")){
@@ -64,14 +64,14 @@ const WalletModal: FC<componentprops> = ({ isOpen, closeModal }) => {
       addToast('Connected to Wallet Connect', { appearance: 'success' })
       closeModal()
     }
-  }, [activate, addToast])
-  const disConnect = async () => {
-    deactivate()
+  }, [activate, addToast,closeModal])
+  // const disConnect = async () => {
+  //   deactivate()
 
-    localStorage.removeItem('walletIsConnectedTo')
+  //   localStorage.removeItem('walletIsConnectedTo')
 
-    setAccountData(null)
-  }
+  //   // setAccountData(null)
+  // }
   const walletsToDisplay = [
     { id: 1, title: 'MetaMask', imgSrc: '', fn: connectMetaMask },
     { id: 3, title: 'WalletConnect', imgSrc: '', fn: connectWalletConnect }
