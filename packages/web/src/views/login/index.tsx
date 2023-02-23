@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 
+
 const Login:FC = () => {
   return (
     <>
@@ -29,7 +30,9 @@ const Login:FC = () => {
           </Link>
           <p className="text-xs text-gray-500 mt-3">more node info.</p>
         </div>
+        
       </div>
+      
     </>
   )
 }
