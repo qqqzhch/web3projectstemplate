@@ -3,7 +3,7 @@ const Home = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-4">
       <div className="flex flex-col w-full  lg:w-1/2 xl:w-1/3 ">
-        <h1 className="m-8 text-2xl font-semibold border-b border-gray-300 py-4">My Multichain Wallet</h1>
+        <h1 className="m-8 text-2xl font-semibold border-b border-gray-300 py-4">My  Wallet</h1>
         {[0, 1, 2, 3, 4, 5].map(key => {
           return (
             <div key={key} className="flex flex-wrap -m-2">
