@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen,act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { Counter } from './index'
@@ -19,9 +19,11 @@ describe('Counter', () => {
     renderCounter()
 
     expect(await screen.findByText(/^1$/)).toBeInTheDocument()
-
-    await user.click(await screen.findByRole('button', { name: /one up/ }))
-
+  
+    await act(async()=>{
+      await user.click(await screen.findByRole('button', { name: /one up/ }))
+    })
+    
     expect(await screen.findByText(/^2$/)).toBeInTheDocument()
   })
 })
