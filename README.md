@@ -23,7 +23,8 @@ This is a monorepo repository using [yarn workspaces](https://classic.yarnpkg.co
 - 🔥 tailwincss
 - 🔥  zustand as store
 - 🔥 with mock api and proxy api
-- 🔥 
+- 🔥 with Examples of unit tests of react hook and store
+- ✨ headlessu
 
 ## 🌐 Samples
 
