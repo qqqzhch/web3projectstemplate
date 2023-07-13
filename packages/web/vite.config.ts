@@ -15,6 +15,14 @@ export default defineConfig({
   macrosPlugin(),
   nodePolyfills()
   ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:3003",
+        changeOrigin: true
+      },
+    },
+  },
   optimizeDeps: {
     exclude: ['@ethersproject/hash', 'wrtc'],
     include: ['js-sha3', '@ethersproject/bignumber']

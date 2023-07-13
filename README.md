@@ -1,4 +1,4 @@
-<h1 align="center">Monorepo frontend boilerplate</h1>
+<h1 align="center">Web3 Projects  Boilerplate</h1>
 
 <p align="center">
   <a href="http://commitizen.github.io/cz-cli/">
@@ -16,11 +16,14 @@ This is a monorepo repository using [yarn workspaces](https://classic.yarnpkg.co
 ## 💥 Features
 
 - ⚡️ Vite 2.0 - (React 18)
-- 📖 Storybook 6
 - 📦 Yarn Workspaces
 - ✨ Host Multiple CRA Apps, Vite apps, Component Libraries & Storybooks in one monorepo
 - 🔥 Hot Reload all Apps, Components & Storybooks
 - 👨‍🔬 Test all workspaces with Eslint & Jest using one command
+- 🔥 tailwincss
+- 🔥  zustand as store
+- 🔥 with mock api and proxy api
+- 🔥 
 
 ## 🌐 Samples
 
@@ -72,11 +75,7 @@ Run the front end application [`@monorepo-boilerplate/web`](./packages/web) and 
   yarn start
 ```
 
-Storybook [`@monorepo-boilerplate/ui-components`](./packages/ui-components) :
 
-```bash
-  yarn storybook
-```
 
 ## 🗂 Monorepo structure
 

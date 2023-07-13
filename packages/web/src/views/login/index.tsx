@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import SelectNode from '@monorepo/ui-components/src/components/selectnode'
+// import SelectNode from '@monorepo/ui-components/src/components/'
 import { Link } from 'react-router-dom';
 
 
@@ -10,7 +10,7 @@ const Login:FC = () => {
     <>
       <div className=" xl:w-3/4 2xl:w-2/3 px-5 py-24 mx-auto flex flex-wrap items-center">
         <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
-          <h1 className="title-font font-medium text-3xl text-gray-900">Multichain - SMPC Wallet</h1>
+          <h1 className="title-font font-medium text-3xl text-gray-900"> Wallet</h1>
           <p className="leading-relaxed mt-4">First, you need to connect to the wallet</p>
           <p className="leading-relaxed mt-4">You can see more about nodes and account related</p>
           <p className="leading-relaxed mt-4">View more nodes</p>
@@ -21,7 +21,7 @@ const Login:FC = () => {
             <label htmlFor="full-name" className="leading-7 text-sm text-gray-600">
               Set the node
             </label>
-            <SelectNode></SelectNode>  
+       
           </div>
           
           

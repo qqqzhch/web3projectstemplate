@@ -30,7 +30,7 @@ const Home = () => {
         <div className="flex flex-col text-left w-full mb-20  mt-20 lg:mt-60">
           
           <p className=" mx-6 lg:mx-28 leading-relaxed text-base text-gray-900">
-          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 ">Welcome to the Multichain - SMPC</h1>
+          <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 ">DEmo</h1>
           The most trusted decentralized custody protocol and collective asset management platform.
           </p>
         </div>
